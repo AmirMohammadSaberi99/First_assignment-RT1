@@ -126,3 +126,71 @@ for m in markers:
 
 Now, the text is formatted in GitHub-style with proper code blocks and headings.
 ```
+# Here is the pseduocode for the program 
+### we will break down every line in the next chapter.
+```shell
+Initialize Robot (R)
+Set ORIENTATION_THRESHOLD and DISTANCE_THRESHOLD
+first = 1
+first_box_placed = True
+
+while first is True:
+    dist, rot_y = find_token_gold()
+    
+    if dist == -1:
+        Print "I don't see any token!!"
+        Set first to 0  # If no markers are detected, end the program
+    else if dist < DISTANCE_THRESHOLD:
+        Print "Found it!"
+        R.grab()  # If close to the token, grab it
+        Print "Gotcha!"
+        Set first to 0
+    else if -ORIENTATION_THRESHOLD <= rot_y <= ORIENTATION_THRESHOLD:
+        Print "Ah, here we are!."
+        Drive with speed 20 for 0.8 seconds
+    else if rot_y < -ORIENTATION_THRESHOLD:
+        Print "Left a bit..."
+        Turn with speed -2 for 0.5 seconds
+    else if rot_y > ORIENTATION_THRESHOLD:
+        Print "Right a bit..."
+        Turn with speed 2 for 0.5 seconds
+
+Turn left with speed -8 for 1.5 seconds
+Drive with speed 30 for 6 seconds
+dist, rot_y = find_token_gold()
+Release the grabbed token
+Drive with speed -20 for 1.5 seconds
+Turn with speed -10 for 4 seconds
+Drive with speed 20 for 2 seconds
+
+for each box in range(5):
+    first_box_placed = True
+    
+    while first_box_placed is True:
+        dist, rot_y = find_token_gold()
+
+        if dist == -1:
+            Print "I don't see any more tokens. All boxes are placed!"
+            Turn with speed 10 for 1 second
+        else if dist < DISTANCE_THRESHOLD:
+            Print "Found it!"
+            R.grab()  # If close to the token, grab it
+            Print "Gotcha!"
+            Turn with speed 20 for 2.5 seconds  # Adjust robot position for the next box placement
+            Drive with speed 22 for 6 seconds  # Move to the reference position
+            dist, rot_y = find_token_gold()
+            Release the grabbed box
+            Drive with speed -20 for 1.5 seconds  # Move away from the reference position
+            Turn with speed -10 for 4 seconds
+            Drive with speed 20 for 2 seconds
+            Set first_box_placed to False  # Box placed, exit the loop
+        else if -ORIENTATION_THRESHOLD <= rot_y <= ORIENTATION_THRESHOLD:
+            Print "Ah, here we are!."
+            Drive with speed 25 for 0.8 seconds
+        else if rot_y < -ORIENTATION_THRESHOLD:
+            Print "Left a bit..."
+            Turn with speed -2 for 0.5 seconds
+        else if rot_y > ORIENTATION_THRESHOLD:
+            Print "Right a bit..."
+            Turn with speed 2 for 0.5 seconds
+```

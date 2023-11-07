@@ -195,6 +195,7 @@ for each box in range(5):
             Turn with speed 2 for 0.5 seconds
 ```
 # Coding 
+a simulated environment where a robot navigates to find and interact with objects—specifically gold tokens. The find_token_gold function searches for the nearest gold token within the robot's view, returning its distance and orientation relative to the robot. If a gold token is within a certain distance and orientation threshold, the robot performs a series of actions such as grabbing the token or adjusting its position. If no tokens are found, the robot stops its search. The main loop iterates through this process, handling the robot's movement and interaction with tokens until all tasks (like placing boxes) are completed. The code contains several control structures for decision-making based on sensory input, demonstrating basic autonomous behavior.
 
 ### Drive Control
 ### Turning Mechanism

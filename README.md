@@ -196,12 +196,12 @@ for each box in range(5):
 ```
 # Coding 
 
-## Drive Control
-## Turning Mechanism
-## Locating Gold
-## Locating Gold
-## Gold Pickup
-## Gold Release
+### Drive Control
+### Turning Mechanism
+### Locating Gold
+### Locating Gold
+### Gold Pickup
+### Gold Release
 
 ## Main Section
-## What is the purpose?
+### What is the purpose?

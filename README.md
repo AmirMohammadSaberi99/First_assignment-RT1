@@ -194,3 +194,14 @@ for each box in range(5):
             Print "Right a bit..."
             Turn with speed 2 for 0.5 seconds
 ```
+# Coding 
+
+## Drive Control
+## Turning Mechanism
+## Locating Gold
+## Locating Gold
+## Gold Pickup
+## Gold Release
+
+## Main Section
+## What is the purpose?

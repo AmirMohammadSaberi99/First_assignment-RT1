@@ -174,6 +174,7 @@ Turn left with speed -8 for 1.5 seconds
 Drive with speed 30 for 6 seconds
 dist, rot_y = find_token_gold()
 Release the grabbed token
+ Print "Token Released!"
 Drive with speed -20 for 1.5 seconds
 Turn with speed -10 for 4 seconds
 Drive with speed 20 for 2 seconds
@@ -185,7 +186,6 @@ for each box in range(5):
         dist, rot_y = find_token_gold()
 
         if dist == -1:
-            Print "I don't see any more tokens. All boxes are placed!"
             Turn with speed 10 for 1 second
         else if dist < DISTANCE_THRESHOLD:
             Print "Found it!"

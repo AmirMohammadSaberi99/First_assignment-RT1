@@ -18,7 +18,7 @@
 - [final loop for counting](#final-loop-for-counting)
 
 
-- [What is the purpose?](#What-is-the-purpose?)
+# What is the purpose?
   
 The objective of the first assignment in the Research Track course is to provide a relative introduction to the Python programming language and its relevance to robotics. In this assignment, we aim to instruct the robot to collect boxes distributed throughout a two-dimensional space and place them in a designated area on the page.
 These are pictures at the beginning and the end of the process.

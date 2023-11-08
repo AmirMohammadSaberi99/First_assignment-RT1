@@ -197,12 +197,253 @@ for each box in range(5):
 # Coding 
 a simulated environment where a robot navigates to find and interact with objects—specifically gold tokens. The find_token_gold function searches for the nearest gold token within the robot's view, returning its distance and orientation relative to the robot. If a gold token is within a certain distance and orientation threshold, the robot performs a series of actions such as grabbing the token or adjusting its position. If no tokens are found, the robot stops its search. The main loop iterates through this process, handling the robot's movement and interaction with tokens until all tasks (like placing boxes) are completed. The code contains several control structures for decision-making based on sensory input, demonstrating basic autonomous behavior.
 
-### Drive Control
-### Turning Mechanism
-### Locating Gold
-### Locating Gold
-### Gold Pickup
-### Gold Release
+### Necessary stuff
 
-## Main Section
-### What is the purpose?
+```shell
+import time
+#Imports the `time` module from Python's standard library. (Makes time-related functions available in this script)
+
+from sr.robot import *
+# Function: Imports all available classes and functions from the `sr.robot` module.
+# Makes the functionalities provided by the `sr.robot` module accessible.
+
+# Threshold for the control of the orientation
+ORIENTATION_THRESHOLD = 2.0
+# Defines a constant named `ORIENTATION_THRESHOLD`.
+# This constant is used as a threshold for orientation control, likely in degrees, to determine when the robot is properly aligned.
+
+# Threshold for the control of the linear distance
+DISTANCE_THRESHOLD = 0.4
+# Defines a constant named `DISTANCE_THRESHOLD`.
+# Threshold for distance control, likely in meters, to determine proximity to a target or object.
+
+fbox = 1
+# Initializes a variable `fbox` to 1.
+# How it works: Sets the initial value of `fbox` to 1.
+# controls a loop or condition related to box handling 
+
+first_box_placed = True
+# Set this to True if the first box is placed
+```
+
+### Drive
+
+```shell
+def drive(speed, seconds):
+    """
+    Function for setting a linear velocity
+
+    Args:
+    speed (int): the speed of the wheels
+    seconds (int): the time interval
+    """
+    R.motors[0].m0.power = speed
+    # Sets the power of motor m0 (left motor linear movement speed) to the specified speed.
+
+    R.motors[0].m1.power = speed
+    # Sets the power of motor m0 (right motor linear movement speed) to the specified speed.
+
+    time.sleep(seconds)
+    # Pauses the program for a specified duration.
+    # This creates a delay, allowing the robot to drive for the specified duration before stopping or changing actions.
+
+    R.motors[0].m0.power = 0
+    # Stops motor m0.
+
+    R.motors[0].m1.power = 0
+    # Function: Stops motor m1.
+```
+
+### Turn 
+
+```shell
+def turn(speed, seconds):
+    """
+    Function for setting an angular velocity
+
+    Args:
+    speed (int): the speed of the wheels
+    seconds (int): the time interval
+    """
+    R.motors[0].m0.power = speed
+    # Function: Sets the power of motor m0 (left motor) for turning.
+
+    R.motors[0].m1.power = -speed
+    # Sets the power of motor m1 (right motor) in the opposite direction for turning.
+    # This line causes motor m1 to rotate in the opposite direction to motor m0, enabling the robot to turn.
+
+    time.sleep(seconds)
+    # Pauses the program for a specified duration.
+    # This creates a delay, allowing the robot to drive for the specified duration before stopping or changing actions.
+
+    R.motors[0].m0.power = 0
+    # Stops motor m0 after turning.
+    # Sets the power of motor m0 to 0.
+
+
+    R.motors[0].m1.power = 0
+    # Stops motor m1 after turning.
+    # Sets the power of motor m1 to 0.
+
+
+```
+
+### find_token_gold
+
+```shell
+    def find_token_gold():
+    dist = 100
+    # Initializes a variable `dist` with a value (100 - maximum distance.).
+
+```
+
+### for token in R.see
+
+```shell
+for token in R.see():
+        # Iterates through objects seen by the robot.
+        # How it works: Uses the `see` method of the robot instance `R` to get a list of visible objects.
+        # This loop processes each object (token) detected by the robot's sensors.
+
+        if token.dist < dist and token.info.marker_type == MARKER_TOKEN_GOLD:
+            dist = token.dist
+            rot_y = token.rot_y
+            # Updates `dist` and `rot_y` if a closer gold token is found.
+            # Checks if the token is a gold one and closer than any previously observed.
+            # If a gold token is detected and is closer than any others seen before, the robot updates its recorded distance and orientation to this token.
+
+ if dist == 100:
+        return -1, -1
+        # Checks if no gold token was found.
+        # How it works: Returns (-1, -1) if `dist` is still 100, meaning no closer token was found.
+        # Detailed Explanation: This condition implies that if no gold token is within a reasonable distance, the function signals this by returning a distinctive value (-1, -1).
+
+ else:
+        return dist, rot_y
+        # Function: Returns the distance and orientation of the closest gold token.
+        # Provides the distance (`dist`) and rotation (`rot_y`) of the nearest gold token.
+        # These values are used to guide the robot's movement towards or around the gold token.
+
+```
+
+### while
+
+```shell
+while fbox:
+    dist, rot_y = find_token_gold()
+    # Calls `find_token_gold` function within the loop.
+    # Retrieves the closest gold token's distance and orientation.
+    # Continuously updates the robot's knowledge of the nearest gold token's position while the loop runs.
+
+    if dist == -1:
+        print("I don't see any token!!")
+        fbox = 0  # if no markers are detected, the program ends
+        # Checks if no gold token is visible and ends the loop.
+
+    elif dist < DISTANCE_THRESHOLD:
+        print("Found it!")
+        R.grab()  # if we are close to the token, we grab it.
+        print("Gotcha!")
+        fbox = 0
+        # Executes actions when the robot is close enough to the token.
+        # If the token is within a defined distance, the robot attempts to grab it.
+
+    elif -ORIENTATION_THRESHOLD <= rot_y <= ORIENTATION_THRESHOLD:
+        print("Ah, here we are!.")
+        drive(20, 0.8)
+        # Drives the robot forward when aligned with the token.
+        # Activates the drive function if the robot's orientation is within acceptable limits.
+        # This part ensures the robot moves towards the token when it is facing it within a certain angular threshold, signifying proper alignment.
+
+    elif rot_y < -ORIENTATION_THRESHOLD:
+        print("Left a bit...")
+        turn(-2, 0.5)
+        # Turns the robot left if it is not properly aligned.
+        # Activates the turn function with negative speed for a slight left turn.
+        # This condition helps in adjusting the robot's orientation when it is not correctly aligned with the token, specifically turning it to the left.
+
+    elif rot_y > ORIENTATION_THRESHOLD:
+        print("Right a bit...")
+        turn(2, 0.5)
+        # Turns the robot right if it is not properly aligned.
+        # Activates the turn function with positive speed for a slight right turn.
+        # Similar to the previous condition but for rightward adjustment, ensuring the robot aligns properly with the token if it is initially facing too far to the left.
+
+
+
+```
+
+## Adjustments
+
+```shell
+
+
+turn(-8, 1.5)
+
+drive(30, 6)
+
+dist, rot_y = find_token_gold()
+# Searches for the nearest gold token.
+# Calls the `find_token_gold` function and stores the distance and orientation to the closest gold token.
+# This line is part of the robot's logic to continually search for and respond to gold tokens in its environment.
+
+R.release()
+# Function: Releases the grabbed object.
+# Invokes the `release` method on the robot object `R`.
+# If the robot has grabbed a token or object, this command will release it, likely as part of a pick-and-place routine.
+
+drive(-20, 1.5)
+
+turn(-10, 4)
+
+drive(20, 2)
+
+```
+
+
+### final loop for counting
+
+```shell
+for box in range(5):
+    first_box_placed = True
+    # Iterates through a task for a set number of boxes.
+    # Initializes a loop that will repeat for each box (total of 6 boxes).
+    # This loop controls the process of handling multiple boxes, repeating the same set of actions for each one.
+
+    while first_box_placed:  # This loop will execute for each subsequent box
+        # Checks if the current box has been placed.
+        # Continues looping until the current box is placed.
+        # This inner loop handles the logic for placing each individual box before moving on to the next.
+
+        # (The body of this while loop follows a similar pattern as described earlier, with conditions for detecting tokens, grabbing them, positioning the robot, etc.)
+
+        first_box_placed = False  # Box placed, exit the loop
+        # Marks the end of the current box's placement.
+        # Sets `first_box_placed` to False, exiting the loop.
+        # Indicates that the current task with the box is complete, allowing the robot to proceed to the next box or end the overall task.
+
+
+
+elif -ORIENTATION_THRESHOLD <= rot_y <= ORIENTATION_THRESHOLD:
+    print("Ah, here we are!.")
+    drive(25, 0.8)
+    # Drives the robot forward when properly oriented towards the target.
+    # Calls the `drive` function to move forward at a speed of 25 for 0.8 seconds.
+    # This condition checks if the robot is well-aligned with the target (within the orientation threshold). If so, it moves the robot forward, likely towards a token or a specific location.
+
+elif rot_y < -ORIENTATION_THRESHOLD:
+    print("Left a bit...")
+    turn(-2, 0.5)
+    # Adjusts the robot's orientation to the left.
+    # Calls the `turn` function with a negative speed, causing a left turn.
+    # This condition is met when the robot is oriented too far to the right of the target. The robot then turns left slightly to correct its orientation.
+
+elif rot_y > ORIENTATION_THRESHOLD:
+    print("Right a bit...")
+    turn(2, 0.5)
+    # Adjusts the robot's orientation to the right.
+    # Calls the `turn` function with a positive speed, causing a right turn.
+    # This line is executed when the robot is facing too far to the left of the target. The robot then turns right slightly to align properly with the target.
+
+```
+The End.

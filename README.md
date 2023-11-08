@@ -27,10 +27,14 @@ These are pictures at the beginning and the end of the process.
 At the first we can see this posture.
 
 
+![bandicam 2023-11-08 11-42-33-853](https://github.com/Alansaberi/First_assignment-RT1/assets/64252685/aace0b7d-9aa8-4301-84ff-f9a51ec0e6c2)
+
+
 
 And here's the final result.
 
 
+![bandicam 2023-11-08 11-44-59-018](https://github.com/Alansaberi/First_assignment-RT1/assets/64252685/5cbfdb27-15be-4bbf-884a-78a0c452eb0e)
 
 
 

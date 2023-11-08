@@ -8,11 +8,12 @@
   - [Grabber](#grabber)
   - [Vision](#vision)
 - [Coding](#coding)
-  - [Drive Control](#drive-control)
-  - [Turning Mechanism](#turning-mechanism)
-  - [Locating Gold](for-token-in-rsee)
-  - 
-  - [While](while)
+  - [Necessary stuff](#Necessary_stuff)
+  - [Drive](#Drive)
+  - [Turn](#Turn)
+  - [find_token_gold](#turning-mechanism)
+  - [for token in R.see](#for-token-in-rsee)
+  - [While](#while)
   - [Adjustments](#Adjustments)
 - [final loop for counting](#final-loop-for-counting)
 

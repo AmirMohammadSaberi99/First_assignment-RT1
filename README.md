@@ -26,17 +26,19 @@ These are pictures at the beginning and the end of the process.
 
 At the first we can see this posture.
 
-![bandicam 2023-11-05 13-50-31-576](https://github.com/Alansaberi/First_assignment-RT1/assets/64252685/02468429-a5df-4f77-8938-90514434a9e1)
+
 
 And here's the final result.
 
-![bandicam 2023-11-05 13-53-01-097](https://github.com/Alansaberi/First_assignment-RT1/assets/64252685/f25e2d28-baae-4611-8361-3fd71eb0fa81)
+
+
 
 
 And here's the Flowchart for the code
 
 
-![Robot](https://github.com/Alansaberi/First_assignment-RT1/assets/64252685/c18822d8-3e55-4267-a44f-9f24ced9b9ba)
+
+![Robot](https://github.com/Alansaberi/First_assignment-RT1/assets/64252685/70e6afd9-58fd-45f3-8a8f-8bccbfa221ed)
 
 
 

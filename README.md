@@ -33,6 +33,13 @@ And here's the final result.
 ![bandicam 2023-11-05 13-53-01-097](https://github.com/Alansaberi/First_assignment-RT1/assets/64252685/f25e2d28-baae-4611-8361-3fd71eb0fa81)
 
 
+And here's the Flowchart for the code
+
+
+![Robot](https://github.com/Alansaberi/First_assignment-RT1/assets/64252685/c18822d8-3e55-4267-a44f-9f24ced9b9ba)
+
+
+
 # Python Robotics Simulator
 
 This is a simple, portable robot simulator developed by Student Robotics. Some of the arenas and the exercises have been modified for the Research Track I course.

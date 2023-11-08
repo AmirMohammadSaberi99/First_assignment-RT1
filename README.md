@@ -10,10 +10,11 @@
 - [Coding](#coding)
   - [Drive Control](#drive-control)
   - [Turning Mechanism](#turning-mechanism)
-  - [Locating Gold](#locating-gold)
-  - [Gold Pickup](#gold-pickup)
-  - [Gold Release](#gold-release)
-- [Main Section](#main-section)
+  - [Locating Gold](for-token-in-rsee)
+  - 
+  - [While](while)
+  - [Adjustments](#Adjustments)
+- [final loop for counting](#final-loop-for-counting)
 
 
 - [What is the purpose?](#What-is-the-purpose?)

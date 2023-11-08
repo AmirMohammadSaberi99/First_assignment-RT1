@@ -400,7 +400,7 @@ R.release()
 # Function: Releases the grabbed object.
 # Invokes the `release` method on the robot object `R`.
 # If the robot has grabbed a token or object, this command will release it, likely as part of a pick-and-place routine.
-
+print("Token Released")
 drive(-20, 1.5)
 
 turn(-10, 4)
@@ -430,9 +430,14 @@ for box in range(5):
         # Marks the end of the current box's placement.
         # Sets `first_box_placed` to False, exiting the loop.
         # Indicates that the current task with the box is complete, allowing the robot to proceed to the next box or end the overall task.
-
-
-
+        dist, rot_y = find_token_gold()
+        #  Retrieves the distance and orientation to the nearest gold token.
+        #  Calls the `find_token_gold` function and assigns the returned values to `dist` and `rot_y`.
+        #  This line is crucial for the robot's decision-making. It continuously checks for the closest gold token, using its distance and orientation data to determine the robot's next action.
+        if dist == -1:
+            turn(10, 1)
+        # Handles the scenario where no gold tokens are found.
+        # Checks if `dist` is -1, a value indicating no tokens are detected, and then executes a turn.
 elif -ORIENTATION_THRESHOLD <= rot_y <= ORIENTATION_THRESHOLD:
     print("Ah, here we are!.")
     drive(25, 0.8)
